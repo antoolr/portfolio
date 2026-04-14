@@ -53,7 +53,7 @@ const titulos = [
     id: 4,
     title: 'Curso completo de Hacking Ético y Ciberseguridad',
     href: '#',
-    description: 'Curso práctico de introducción al hacking ético: reconocimiento, escaneo, análisis de vulnerabilidades y uso de Kali Linux en entornos controlados.',
+    description: 'Curso práctico de introducción al hacking ético: reconocimiento, escaneo, análisis de vulnerabilidades y uso de Kali Linux.',
     datetime: '2026',
     category: { title: 'Udemy', href: '#' },
     author: {
@@ -68,7 +68,7 @@ const titulos = [
     id: 5,
     title: 'Curso avanzado de Hacking Ético y Ciberseguridad',
     href: '#',
-    description: 'Formación avanzada en técnicas de intrusión, explotación, post‑explotación y análisis profundo de vulnerabilidades en escenarios reales.',
+    description: 'Formación avanzada en técnicas de intrusión, explotación, post‑explotación y análisis profundo de vulnerabilidades.',
     datetime: '2026',
     category: { title: 'Udemy', href: '#' },
     author: {
