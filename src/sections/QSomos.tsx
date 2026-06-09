@@ -30,7 +30,6 @@ export default function QSomos() {
           <div className="mx-auto max-w-7xl px-6 lg:px-8 flex flex-col items-center"> {/* Añadido flex y centrado de items */}
         <div className="mx-auto max-w-2xl text-center lg:mx-auto"> {/* Cambiado lg:mx-0 por lg:mx-auto e incluido text-center */}
           <h2 className="text-5xl font-bold tracking-tight text-white sm:text-7xl">¡Trabaja conmigo!</h2>
-          <Button variant="bluex"> Primario </Button>
           <p className="mt-8 text-lg font-medium text-gray-300 sm:text-xl/8">
             Soy Antonio, desarrollador web y especialista en ciberseguridad. 
             Me apasiona crear aplicaciones modernas, rápidas y seguras, combinando diseño, funcionalidad y protección de datos.

@@ -1,6 +1,7 @@
 
 import './Header.css'
 
+import { Link, useLocation } from "react-router-dom"
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
@@ -11,22 +12,42 @@ import fotoAntonio from "../../fotos/antonio.jpeg";
 const navigation = [
   { 
     name: 'Quienes somos',
-     href: '#QSomos', 
-     current: true 
+    href: '/#QSomos',
+    current: true,
   },
+  { name: 'Trabajos', href: '/#trabajos', current: false },
+  { name: 'Formaciones', href: '/#formaciones', current: false },
+  { name: 'Contacto', href: '/#contacto', current: false },
+  { name: 'Servicios', href: '/#servicios', current: false },
+  { name: 'Cursos', href: '/cursos', current: false },
 
-  { name: 'Trabajos', href: '#trabajos', current: false },
-  { name: 'Formaciones', href: '#formaciones', current: false },
-  { name: 'Contacto', href: '#', current: false },
-  {name: 'Servicios', href: '#servicios', current: false},
-  { name: 'Productos', href: '#', current: false },
-  { name: 'Categorías', href: '#', current: false },
+  
 ]
 
 function classNames(...classes:any[]) {
   return classes.filter(Boolean).join(' ')
 }
+
+function getLinkTarget(href: string) {
+  if (href.startsWith('/#')) {
+    return { pathname: '/', hash: href.slice(href.indexOf('#')) }
+  }
+  return href
+}
+
+function isActiveNavItem(href: string, location: ReturnType<typeof useLocation>) {
+  if (href === '/cursos') {
+    return location.pathname === '/cursos'
+  }
+  if (href.startsWith('/#')) {
+    return location.pathname === '/' && location.hash.toLowerCase() === href.slice(href.indexOf('#')).toLowerCase()
+  }
+  return location.pathname === href
+}
+
 function Header (){
+    const location = useLocation()
+
     //codigo TS --> tsx o JS -- jsx
 
     return (
@@ -53,19 +74,34 @@ function Header (){
             </div>
             <div className="hidden sm:ml-6 sm:block w-[80%]">
                 <nav id="nav-ppal" className="flex space-x-4">
-                  {navigation.map((item) => (
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      aria-current={item.current ? 'page' : undefined}
-                      className={classNames(
-                        item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white',
-                        'rounded-md px-3 py-2 text-sm font-medium',
-                      )}
-                    >
-                      {item.name}
-                    </a>
-                  ))}
+                  {navigation.map((item) => {
+                    const isActive = isActiveNavItem(item.href, location)
+                    const classes = classNames(
+                      isActive ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white',
+                      'rounded-md px-3 py-2 text-sm font-medium',
+                    )
+                    const to = getLinkTarget(item.href)
+
+                    return item.href.startsWith('/') ? (
+                      <Link
+                        key={item.name}
+                        to={to}
+                        aria-current={isActive ? 'page' : undefined}
+                        className={classes}
+                      >
+                        {item.name}
+                      </Link>
+                    ) : (
+                      <a
+                        key={item.name}
+                        href={item.href}
+                        aria-current={isActive ? 'page' : undefined}
+                        className={classes}
+                      >
+                        {item.name}
+                      </a>
+                    )
+                  })}
               </nav>
             </div>
           </div>
@@ -127,20 +163,24 @@ function Header (){
 
       <DisclosurePanel className="sm:hidden">
         <div className="space-y-1 px-2 pt-2 pb-3">
-          {navigation.map((item) => (
-            <DisclosureButton
-              key={item.name}
-              as="a"
-              href={item.href}
-              aria-current={item.current ? 'page' : undefined}
-              className={classNames(
-                item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white',
-                'block rounded-md px-3 py-2 text-base font-medium',
-              )}
-            >
-              {item.name}
-            </DisclosureButton>
-          ))}
+          {navigation.map((item) => {
+            const isActive = isActiveNavItem(item.href, location)
+            const classes = classNames(
+              isActive ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white',
+              'block rounded-md px-3 py-2 text-base font-medium',
+            )
+            const to = getLinkTarget(item.href)
+
+            return item.href.startsWith('/') ? (
+              <DisclosureButton key={item.name} as={Link} to={to} className={classes}>
+                {item.name}
+              </DisclosureButton>
+            ) : (
+              <DisclosureButton key={item.name} as="a" href={item.href} className={classes}>
+                {item.name}
+              </DisclosureButton>
+            )
+          })}
         </div>
       </DisclosurePanel>
     </Disclosure>
