@@ -5,10 +5,11 @@
  */
 
 // backend/services/cursos.ts
-import { supabase } from "@/lib/supabase";
+import { getSupabase } from "@/lib/supabase";
 import type { ICurso } from "@/model/interfaces/ICurso";
 
 export const fetchCursos = async (): Promise<ICurso[]> => {
+  const supabase = getSupabase();
   const { data, error } = await supabase.from('cursos').select('*').order('id', { ascending: true });
   if (error) {
     throw new Error(error.message || JSON.stringify(error));
@@ -18,6 +19,7 @@ export const fetchCursos = async (): Promise<ICurso[]> => {
 
 export const createCurso = async (cursoData: Partial<ICurso>): Promise<ICurso[]> => {
   console.log('Intentando insertar curso:', cursoData);
+  const supabase = getSupabase();
   const { data, error } = await supabase.from('cursos').insert([cursoData]).select();
   console.log('Respuesta de inserción - data:', data, 'error:', error);
   if (error) {
@@ -29,6 +31,7 @@ export const createCurso = async (cursoData: Partial<ICurso>): Promise<ICurso[]>
 
 export const updateCurso = async (id: number, cursoData: Partial<ICurso>): Promise<ICurso[]> => {
   console.log('Intentando actualizar curso id:', id, 'con datos:', cursoData);
+  const supabase = getSupabase();
   const { data, error } = await supabase.from('cursos').update(cursoData).eq('id', id).select();
   console.log('Respuesta de actualización - data:', data, 'error:', error);
   if (error) {
@@ -43,6 +46,7 @@ export const updateCursoByTitle = async (
   cursoData: Partial<ICurso>
 ): Promise<ICurso[]> => {
   console.log('Intentando actualizar curso título:', originalTitle, 'con datos:', cursoData);
+  const supabase = getSupabase();
   const { data, error } = await supabase
     .from('cursos')
     .update(cursoData)
@@ -58,6 +62,7 @@ export const updateCursoByTitle = async (
 
 export const deleteCurso = async (id: number): Promise<void> => {
   console.log('Intentando eliminar curso id:', id);
+  const supabase = getSupabase();
   const { error } = await supabase.from('cursos').delete().eq('id', id);
   console.log('Respuesta de eliminación - error:', error);
   if (error) {
@@ -68,6 +73,7 @@ export const deleteCurso = async (id: number): Promise<void> => {
 
 export const deleteCursoByTitle = async (originalTitle: string): Promise<void> => {
   console.log('Intentando eliminar curso título:', originalTitle);
+  const supabase = getSupabase();
   const { error } = await supabase.from('cursos').delete().eq('título', originalTitle);
   console.log('Respuesta de eliminación por título - error:', error);
   if (error) {

@@ -15,6 +15,12 @@ export default function CursosAdmin() {
   const [error, setError] = useState<string | null>(null)
 
   async function loadCursos() {
+    if (!supabase) {
+      setError("Configuración de Supabase incompleta. Contacta con el administrador.")
+      setLoading(false)
+      return
+    }
+
     const { data, error } = await supabase
       .from("cursos")
       .select("*")
