@@ -1,4 +1,3 @@
-import { ServiciosCard } from "@/Components/main/servicios/ServiciosCard"
 // import dataServicios from "@/model/data/servicios.json"
 
 

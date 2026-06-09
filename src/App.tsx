@@ -11,7 +11,7 @@ import { SiteHeader } from "./Components/site-header"
 import { SidebarProvider, SidebarInset } from "./Components/ui/sidebar"
 
 // IMPORTANTE: provider de shadcn
-import { TooltipProvider } from "@/components/ui/tooltip"
+import { TooltipProvider } from "@/Components/ui/tooltip"
 
 function AdminLayout() {
   return (

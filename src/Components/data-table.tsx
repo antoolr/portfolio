@@ -64,7 +64,7 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@/Components/ui/dropdown-menu"
 import { Input } from "@/Components/ui/input"
 import { Label } from "@/Components/ui/label"
 import {
@@ -450,7 +450,7 @@ export function DataTable({
                       key={column.id}
                       className="capitalize"
                       checked={column.getIsVisible()}
-                      onCheckedChange={(value) =>
+                      onCheckedChange={(value: boolean | "indeterminate") =>
                         column.toggleVisibility(!!value)
                       }
                     >

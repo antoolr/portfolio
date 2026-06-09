@@ -1,7 +1,3 @@
-import { Button } from "@/Components/ui/button";
-import React from "react";
-
-
 const links = [
   { name: 'Servicios que ofrezco', href: 'https://www.linkedin.com/in/tu-perfil' }, // Cambia por tu LinkedIn
   { name: 'Tecnologías que domino', href: 'https://github.com/antoolr?tab=repositories' },
